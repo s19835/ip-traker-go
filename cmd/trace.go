@@ -14,6 +14,7 @@ var trackeCmd = &cobra.Command{
 		if len(args) > 0 {
 			for _, ip := range args {
 				fmt.Println(ip)
+				getData()
 			}
 		} else {
 			fmt.Println("Provide valid IP address")
@@ -23,4 +24,9 @@ var trackeCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(trackeCmd)
+}
+
+func getData() {
+	url := "http://ipinfo.io/1.1.1.1/geo"
+	fmt.Println(url)
 }
