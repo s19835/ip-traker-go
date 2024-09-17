@@ -14,7 +14,6 @@ var rootCmd = &cobra.Command{
 	Use:   "ip-traker-go",
 	Short: "Trace the geographical location and other details of an IP address.",
 	Long:  `This CLI application allows users to trace the geographical location, ISP, and other details of a given IP address. It provides essential information such as the country, city, and latitude/longitude coordinates. Additionally, the tool can be used to analyze multiple IP addresses at once, making it a useful utility for network administrators, cybersecurity analysts, and general users who want to gain insights into IP address origins. It supports both IPv4 and IPv6 formats, and can also perform reverse lookups if necessary.`,
-	// Run: func(cmd *cobra.Command, args []string) { },
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
