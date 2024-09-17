@@ -1,6 +1,5 @@
 /*
-Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-
+Copyright © 2024 MARIA NIRANJAN <s19835@sci.pdn.ac.lk>
 */
 package cmd
 
@@ -13,13 +12,8 @@ import (
 // traceCmd represents the trace command
 var traceCmd = &cobra.Command{
 	Use:   "trace",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Trace IP address details using the ipinfo API.",
+	Long:  `The "trace" command allows you to trace and retrieve detailed information about an IP address using the ipinfo API. This command provides key insights such as the IP's geographical location, including country, city, and coordinates, as well as the Internet Service Provider (ISP) and organization details. It supports both IPv4 and IPv6 addresses. By leveraging the ipinfo API, the "trace" command ensures accurate and up-to-date information, making it a powerful tool for network diagnostics, security analysis, and general IP tracking.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("trace called")
 	},
