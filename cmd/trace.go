@@ -19,7 +19,13 @@ var traceCmd = &cobra.Command{
 	Short: "Trace IP address details using the ipinfo API.",
 	Long:  `The "trace" command allows you to trace and retrieve detailed information about an IP address using the ipinfo API. This command provides key insights such as the IP's geographical location, including country, city, and coordinates, as well as the Internet Service Provider (ISP) and organization details. It supports both IPv4 and IPv6 addresses. By leveraging the ipinfo API, the "trace" command ensures accurate and up-to-date information, making it a powerful tool for network diagnostics, security analysis, and general IP tracking.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("trace called")
+		if len(args) > 0 {
+			for _, ip := range args {
+				showData(ip)
+			}
+		} else {
+			fmt.Println("provide a valid IP to trace")
+		}
 	},
 }
 
@@ -52,13 +58,16 @@ type IP struct {
 	Timezone string `json:"timezone"`
 }
 
-func showData() {
-	url := "https://ipinfo.io/8.8.8.8/json?token=d39218ee15f924"
+func showData(ip string) {
+	url := "https://ipinfo.io/" + ip + "/json?token=d39218ee15f924"
 	responseByte := getData(url)
 
 	data := IP{}
 
 	json.Unmarshal(responseByte, &data)
+
+	fmt.Println("DATA FOUND: ")
+	fmt.Println(data)
 }
 
 func getData(url string) []byte {
