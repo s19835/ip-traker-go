@@ -5,6 +5,9 @@ package cmd
 
 import (
 	"fmt"
+	"io/ioutil"
+	"log"
+	"net/http"
 
 	"github.com/spf13/cobra"
 )
@@ -23,12 +26,49 @@ func init() {
 	rootCmd.AddCommand(traceCmd)
 
 	// Here you will define your flags and configuration settings.
+}
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// traceCmd.PersistentFlags().String("foo", "", "A help for foo")
+//	{
+//	    "ip": "8.8.8.8",
+//	    "hostname": "dns.google",
+//	    "anycast": true,
+//	    "city": "Mountain View",
+//	    "region": "California",
+//	    "country": "US",
+//	    "loc": "37.4056,-122.0775",
+//	    "org": "AS15169 Google LLC",
+//	    "postal": "94043",
+//	    "timezone": "America/Los_Angeles"
+//	}
 
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// traceCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+type IP struct {
+	IP       string
+	City     string
+	Region   string
+	Country  string
+	Location string
+	Postal   string
+	Timezone string
+}
+
+func showData() {
+	url := "https://ipinfo.io/8.8.8.8/json?token=d39218ee15f924"
+	getData(url)
+
+}
+
+func getData(url string) []byte {
+	response, err := http.Get(url)
+
+	if err != nil {
+		log.Println("Response not found")
+	}
+
+	responseByte, err := ioutil.ReadAll(response.Body)
+
+	if err != nil {
+		log.Println("unable to read the response")
+	}
+
+	return responseByte
 }
