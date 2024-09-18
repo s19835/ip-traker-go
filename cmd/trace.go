@@ -4,6 +4,7 @@ Copyright © 2024 MARIA NIRANJAN <s19835@sci.pdn.ac.lk>
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -42,19 +43,22 @@ func init() {
 //	}
 
 type IP struct {
-	IP       string
-	City     string
-	Region   string
-	Country  string
-	Location string
-	Postal   string
-	Timezone string
+	IP       string `json:"ip"`
+	City     string `json:"city"`
+	Region   string `json:"region"`
+	Country  string `json:"country"`
+	Location string `json:"loc"`
+	Postal   string `json:"postal"`
+	Timezone string `json:"timezone"`
 }
 
 func showData() {
 	url := "https://ipinfo.io/8.8.8.8/json?token=d39218ee15f924"
-	getData(url)
+	responseByte := getData(url)
 
+	data := IP{}
+
+	json.Unmarshal(responseByte, &data)
 }
 
 func getData(url string) []byte {
